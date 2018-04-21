@@ -1,0 +1,55 @@
+library(data.table) 
+#library(psych)
+setwd("C:\\Users\\Lenovo\\Desktop\\IIIT-Delhi\\semester 7\\IP_LOGS\\WhileDriving")
+accel <- read.csv("N1.csv", stringsAsFactors=F)
+#head(accel)
+summary(accel$val)
+plot(accel$val, t="l") # t="l" means line plot
+
+#describe(accel$val)
+accel <- read.csv("N2.csv", stringsAsFactors=F)
+summary(accel$val)
+plot(accel$val, t="l") 
+accel <- read.csv("N3.csv", stringsAsFactors=F)
+summary(accel$val)
+plot(accel$val, t="l") 
+accel <- read.csv("N4.csv", stringsAsFactors=F)
+summary(accel$val)
+plot(accel$val, t="l") 
+accel <- read.csv("N5.csv", stringsAsFactors=F)
+summary(accel$val)
+plot(accel$val, t="l") 
+#head(accel)
+#summary(accel$val)
+## t="l" means line plot
+
+
+#mad and median 
+library(data.table) 
+setwd("C:\\Users\\Lenovo\\Desktop\\IIIT-Delhi\\semester 7\\IP_LOGS\\WhileNotDriving")
+accel <- read.csv("N1.csv", stringsAsFactors=F)
+summary(accel$val)
+plot(accel$val, t="l") 
+accel <- read.csv("N2.csv", stringsAsFactors=F)
+summary(accel$val)
+plot(accel$val, t="l") 
+accel <- read.csv("N3.csv", stringsAsFactors=F)
+summary(accel$val)
+plot(accel$val, t="l") 
+
+library(data.table) 
+library(zoo)
+library(stats)
+setwd("C:\\Users\\Lenovo\\Desktop\\IIIT-Delhi\\semester 7\\IP_LOGS\\WhileDriving")
+sample70 <- read.csv("N6.csv", stringsAsFactors=F)
+newvariable <- as.vector(sample70$val)
+
+vals <- rollapply(zoo(c(newvariable)), width = 50, by = 1, FUN = median, align = "left")
+vals
+write.csv(vals, "tone.csv")
+
+setwd("C:\\Users\\Lenovo\\Desktop\\IIIT-Delhi\\semester 7\\IP_LOGS\\WhileNotDriving")
+sample70 <- read.csv("N4.csv", stringsAsFactors=F)
+newvariable <- as.vector(sample70$val)
+vals <- rollapply(zoo(c(newvariable)), width = 50, by = 1, FUN = median, na.rm = TRUE, align = "left")
+write.csv(vals, "tzero.csv")
